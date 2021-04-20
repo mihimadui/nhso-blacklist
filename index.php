@@ -4,7 +4,7 @@
     <!-- META -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="#">
+<!--    <meta name="description" content="#">-->
     <!-- PERFORMANCE -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
     <link rel="preload" as="style" href="style.css">
@@ -31,6 +31,24 @@
 </header>
 <main role="main">
 
+    <?php
+    //whether ip is from share internet
+    if (!empty($_SERVER['HTTP_CLIENT_IP']))
+    {
+        $ip_address = $_SERVER['HTTP_CLIENT_IP'];
+    }
+//whether ip is from proxy
+    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+    {
+        $ip_address = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    }
+//whether ip is from remote address
+    else
+    {
+        $ip_address = $_SERVER['REMOTE_ADDR'];
+    }
+    ?>
+
     <section class="ui-section-close">
         <div class="ui-layout-container">
             <div class="ui-layout-column-6 ui-layout-column-center">
@@ -39,7 +57,7 @@
                 <div class="ui-component-cta ui-layout-flex">
                     <a href="#" role="link" aria-label="#" style="font-size: 28px;"
                        class="ui-component-button ui-component-button-normal ui-component-button-primary">IP Address
-                        <?=$_SERVER['REMOTE_ADDR']?></a>
+                        <?=$ip_address?></a>
 <!--                    <p class="ui-text-note"><small>Firefox and Safari soon.</small></p>-->
                 </div>
                 <h3>ของท่านไม่ปลอดภัย (IP Address Blacklist)</h3>
